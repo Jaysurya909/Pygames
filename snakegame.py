@@ -1,5 +1,10 @@
 import pygame
 
+
+#other things
+fps=30
+clock=pygame.time.Clock()
+
 #colors
 white=(255,255,255)
 black=(0,0,0)
@@ -28,3 +33,8 @@ while not exit_game:
 
     pygame.draw.rect(gamewindow,green,[snake_x,snake_y,snake_size,snake_size])
     pygame.display.update()
+
+
+
+
+    clock.tick(fps)
