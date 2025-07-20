@@ -20,6 +20,7 @@ pygame.display.set_caption("Snake Game")
 
 #Gamevariables
 #snake
+score=0
 snake_x=45
 snake_y=45
 snake_size_x=10
@@ -27,8 +28,8 @@ snake_size_y=10
 snake_velocity_x=5
 snake_velocity_y=5
 #food
-food_x=random.randint(0,screen_width)
-food_y=random.randint(0,screen_height)
+food_x=random.randint(20,screen_width)
+food_y=random.randint(20,screen_height)
 
 exit_game=False
 direction=None
@@ -48,18 +49,20 @@ while not exit_game:
 
         
         if event.type==pygame.KEYDOWN:
-            if event.key==pygame.K_RIGHT:
-                # snake_x=snake_x+snake_velocity_x
-                direction=3     
-            if event.key==pygame.K_LEFT:
-                # snake_x=snake_x-snake_velocity_x
-                direction=4
             if event.key==pygame.K_UP:
                 # snake_y=snake_y-snake_velocity_y
                 direction=1
             if event.key==pygame.K_DOWN:
                 # snake_y=snake_y+snake_velocity_y
                 direction=2
+            if event.key==pygame.K_RIGHT:
+                # snake_x=snake_x+snake_velocity_x
+                direction=3     
+            if event.key==pygame.K_LEFT:
+                # snake_x=snake_x-snake_velocity_x
+                direction=4
+            
+            
 
     if(direction==1):
         snake_y=snake_y-snake_velocity_y
@@ -70,7 +73,12 @@ while not exit_game:
     elif(direction==4):
         snake_x=snake_x-snake_velocity_x
 
-        
+    if abs(snake_x-food_x)<6 and abs(snake_y-food_y)<6:
+        score+=1
+        print("Score:- ",score) 
+        food_x=random.randint(20,screen_width)
+        food_y=random.randint(20,screen_height)
+
     
 
 
