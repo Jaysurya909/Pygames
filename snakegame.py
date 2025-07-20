@@ -19,6 +19,7 @@ gamewindow=pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption("Snake Game")
 
 #Gamevariables
+hitbox=6
 #snake
 score=0
 snake_x=45
@@ -30,6 +31,8 @@ snake_velocity_y=5
 #food
 food_x=random.randint(20,screen_width)
 food_y=random.randint(20,screen_height)
+food_size_x=10
+food_size_y=10
 
 exit_game=False
 direction=None
@@ -39,7 +42,7 @@ direction=None
 while not exit_game:
     gamewindow.fill(black)
     
-    pygame.draw.rect(gamewindow,yellow,[food_x,food_y,snake_size_x,snake_size_y])
+    pygame.draw.rect(gamewindow,yellow,[food_x,food_y,food_size_x,food_size_y])
     pygame.draw.rect(gamewindow,green,[snake_x,snake_y,snake_size_x,snake_size_y])
     
     
@@ -73,11 +76,14 @@ while not exit_game:
     elif(direction==4):
         snake_x=snake_x-snake_velocity_x
 
-    if abs(snake_x-food_x)<6 and abs(snake_y-food_y)<6:
+    if abs(snake_x-food_x)<hitbox and abs(snake_y-food_y)<hitbox:
         score+=1
         print("Score:- ",score) 
+        
         food_x=random.randint(20,screen_width)
         food_y=random.randint(20,screen_height)
+        snake_size_x+=2
+        
 
     
 
