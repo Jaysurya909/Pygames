@@ -2,7 +2,7 @@ import pygame
 import random
 
 
-#other things
+#frames limit
 fps=30
 clock=pygame.time.Clock()
 
@@ -17,6 +17,14 @@ screen_width=700
 screen_height=500
 gamewindow=pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption("Snake Game")
+
+#scoreboard
+pygame.font.init()
+font=pygame.font.SysFont(None,35)
+
+def scoreboard(surface,score):
+    score_text=font.render(f"Score: {score}",True,white)
+    surface.blit(score_text,[10,10])
 
 #Gamevariables
 hitbox=6
@@ -78,21 +86,13 @@ while not exit_game:
 
     if abs(snake_x-food_x)<hitbox and abs(snake_y-food_y)<hitbox:
         score+=1
-        print("Score:- ",score) 
         
         food_x=random.randint(20,screen_width)
         food_y=random.randint(20,screen_height)
         snake_size_x+=2
         
-
+    scoreboard(gamewindow,score) 
     
-
-
-        
-
     pygame.display.update()
-
-
-
 
     clock.tick(fps)
